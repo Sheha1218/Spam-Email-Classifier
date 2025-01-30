@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Detector</title>
+   
+</head>
+<body>
+
+    <div class="wrapper">
+        <img src="spam.webp" alt="Spam Detector" width="100%" style="border-radius: 12px; margin-bottom: 20px;">
+
+        <h1>Spam Detector</h1>
+
+        <form action="/" method="POST">
+            <div class="inputfield">
+                <label for="message">Enter Your Message:</label>
+                <input type="text" class="input" name="message" id="message" placeholder="Type your message here..." required>
+            </div>
+
+            <div class="inputfield">
+                <input type="submit" class="btn" value="Predict Spam">
+            </div>
+        </form>
+
+        
+        <div class="result" id="result" style="display: none;">
+            <h2>Prediction Result: <span id="predictionResult"></span></h2>
+        </div>
+    </div>
+
+    <script>
+        
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            
+            const message = document.getElementById('message').value;
+            const isSpam = message.toLowerCase().includes('buy') || message.toLowerCase().includes('ticket');
+
+            
+            const resultDiv = document.getElementById('result');
+            const predictionResult = document.getElementById('predictionResult');
+            predictionResult.textContent = isSpam ? 'Spam' : 'Not Spam';
+            resultDiv.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
+
+
+<style>
+    /* General Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    /* Background Styling */
+    body {
+        background: linear-gradient(135deg,rgb(10, 10, 16), #b9b9ff);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+
+    /* Form Container */
+    .wrapper {
+        max-width: 420px;
+        width: 100%;
+        background:rgb(246, 239, 239);
+        padding: 35px 30px;
+        border-radius: 15px;
+        box-shadow: 0px 12px 30px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Title Styling */
+    .wrapper h1 {
+        font-size: 26px;
+        color: #333;
+        font-weight: 700;
+        margin-bottom: 18px;
+        position: relative;
+    }
+
+    /* Title underline */
+    .wrapper h1::after {
+        content: "";
+        width: 60px;
+        height: 3px;
+        background:rgb(223, 222, 234);
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* Label Styling */
+    .inputfield label {
+        font-size: 15px;
+        color: rgb(0, 0, 0);
+        font-weight: 600;
+        display: block;
+        margin-bottom: 8px;
+        text-align: left;
+        letter-spacing: 0.5px;
+    }
+
+    /* Input Field */
+    .inputfield {
+        text-align: left;
+        margin: 18px 0;
+    }
+
+    .inputfield .input {
+        width: 100%;
+        padding: 25px 50px;
+        font-size: 16px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        background:rgb(252, 251, 251);
+        transition: all 0.3s ease;
+        outline: none;
+    }
+
+    .inputfield .input:focus {
+        border-color:rgb(245, 245, 246);
+        background: #fff;
+        box-shadow: 0 0 6px rgba(6, 6, 6, 0.3);
+    }
+
+    /* Submit Button */
+    .btn {
+        width: 100%;
+        padding: 14px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+        background: linear-gradient(135deg, #6c63ff, #4c47d9);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn:hover {
+        background: linear-gradient(135deg, #5753c9, #3e39a6);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 18px rgba(108, 99, 255, 0.4);
+    }
+
+    .btn:active {
+        transform: scale(0.98);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+        .wrapper {
+            padding: 25px;
+        }
+        .wrapper h1 {
+            font-size: 22px;
+        }
+        .inputfield label {
+            font-size: 14px;
+        }
+        .btn {
+            font-size: 16px;
+            padding: 12px;
+        }
+    }
+</style>
